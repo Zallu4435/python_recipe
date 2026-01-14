@@ -60,6 +60,24 @@ function SearchContent() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    // Lock body scroll on mobile when filter is open
+    useEffect(() => {
+        const checkScrollLock = () => {
+            if (isFilterOpen && window.innerWidth <= 640) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        };
+
+        checkScrollLock();
+        window.addEventListener('resize', checkScrollLock);
+        return () => {
+            window.removeEventListener('resize', checkScrollLock);
+            document.body.style.overflow = '';
+        };
+    }, [isFilterOpen]);
+
     // Update URL when filters change
     useEffect(() => {
         const params = new URLSearchParams(searchParams);
@@ -118,7 +136,7 @@ function SearchContent() {
             <header className="search-header">
                 <div className="container">
                     <div className="search-header-content animate-fade-in">
-                        <div className="badge">
+                        <div className="badge animate-float">
                             <Sparkles size={14} />
                             <span>Challenge Library</span>
                         </div>
@@ -135,11 +153,20 @@ function SearchContent() {
                         />
                     </div>
                 </div>
+                <div className="cta-decoration animate-float-slow" style={{ top: '20%', right: '5%' }}>
+                    <Search size={160} />
+                </div>
             </header>
 
             {/* Results Section */}
             <main className="search-results-main container">
-                <div className="results-meta animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <div
+                    className="results-meta animate-fade-in-opacity"
+                    style={{
+                        animationDelay: '0.2s',
+                        zIndex: isFilterOpen ? 2000 : 100
+                    }}
+                >
                     <div className="results-count">
                         {status === 'loading' && recipes.length === 0 ? (
                             'Scanning library...'

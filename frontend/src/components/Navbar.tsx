@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ChefHat, Sparkles } from 'lucide-react';
+import { Menu, X, ChefHat, Sparkles, Home, UtensilsCrossed } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function Navbar() {
@@ -23,8 +23,8 @@ export default function Navbar() {
     const isActive = (path: string) => pathname === path;
 
     const navLinks = [
-        { name: 'Home', href: '/' },
-        { name: 'Challenges', href: '/search' },
+        { name: 'Home', href: '/', icon: <Home size={24} /> },
+        { name: 'Challenges', href: '/search', icon: <UtensilsCrossed size={24} /> },
     ];
 
     return (
@@ -68,15 +68,18 @@ export default function Navbar() {
                 {/* Mobile Menu */}
                 <div className={`navbar-mobile-menu ${isMobileMenuOpen ? 'is-open' : ''}`}>
                     <div className="mobile-menu-content">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className={`mobile-nav-item ${isActive(link.href) ? 'is-active' : ''}`}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                {link.name}
-                            </Link>
+                        {navLinks.map((link, index) => (
+                            <div key={link.name} className="flex-center flex-column" style={{ width: '100%' }}>
+                                <Link
+                                    href={link.href}
+                                    className={`mobile-nav-item ${isActive(link.href) ? 'is-active' : ''}`}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    <div className="mobile-nav-icon">{link.icon}</div>
+                                    <span className="mobile-nav-text">{link.name}</span>
+                                </Link>
+                                {index < navLinks.length - 1 && <div className="mobile-menu-divider" />}
+                            </div>
                         ))}
                         <div className="mobile-menu-footer">
                             <Link

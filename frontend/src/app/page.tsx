@@ -35,7 +35,7 @@ export default function Home() {
     <div className="home-page">
       {/* Hero Section */}
       <section className="hero-section container">
-        <div className="badge animate-fade-in">
+        <div className="badge animate-fade-in animate-float">
           <Sparkles size={14} />
           <span>Powered by Gemini AI</span>
         </div>
@@ -139,7 +139,8 @@ export default function Home() {
 
         <div className="mobile-only-btn">
           <Link href="/search" className="btn-primary full-width">
-            View All Recipes
+            <span>Explore All</span>
+            <ChevronRight size={18} />
           </Link>
         </div>
       </section>
@@ -155,7 +156,7 @@ export default function Home() {
               <span>Start Your First Puzzle</span>
             </Link>
           </div>
-          <div className="cta-decoration" aria-hidden="true">
+          <div className="cta-decoration animate-float-slow" aria-hidden="true">
             <Utensils size={120} />
           </div>
         </div>

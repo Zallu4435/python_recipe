@@ -104,7 +104,7 @@ export default function RecipePage() {
             {/* Dark background overlay for hero */}
             <div className="hero-background-glow" style={{ backgroundImage: `url(${recipe.image})` }} />
 
-            <div className="container relative z-1">
+            <div className="container z-1">
                 {/* Back Button */}
                 <button
                     className="back-btn animate-fade-in"
@@ -151,7 +151,7 @@ export default function RecipePage() {
                     </div>
                 </div>
 
-                <div className="recipe-game-grid grid-layout mt-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))' }}>
+                <div className="recipe-game-grid mt-4">
 
                     {/* HINTS PANEL */}
                     <div className="glass-panel hint-exploration-panel animate-fade-in" style={{ animationDelay: '0.2s' }}>

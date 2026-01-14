@@ -30,7 +30,8 @@ export default function Pagination({ page, totalPages, setPage }: PaginationProp
 
             <div className="pagination-number-info">
                 <span className="current-page">{page}</span>
-                <span className="total-pages-sep">of</span>
+                <span className="total-pages-sep desktop-sep">of</span>
+                <span className="total-pages-sep mobile-sep">/</span>
                 <span className="total-pages">{totalPages}</span>
             </div>
 

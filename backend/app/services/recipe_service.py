@@ -119,6 +119,9 @@ async def generate_ai_feedback(recipe_name: str, plan: str, score: int, matched:
         error_msg = str(e)
         print(f"\n[AI ERROR] Failed to generate feedback: {error_msg}\n")  # Console log for backend debugging
         
+        if "403" in error_msg or "leaked" in error_msg or "API key" in error_msg:
+            return "Chef's license expired! (Invalid/Leaked API Key 🔑). Please update your .env file."
+            
         if "429" in error_msg or "Quota exceeded" in error_msg:
             return "Chef is overwhelmed with orders! (Rate Limit Hit - Try again in 30s) 🕒"
         if "404" in error_msg and "models/" in error_msg:
